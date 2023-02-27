@@ -4,40 +4,35 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
-    //this.timer = container.querySelector('.status-clock');
-    this.Array = Array.from(document.querySelectorAll('.symbol'))
-    this.sec = this.Array.length;
+
 
     this.reset();
 
     this.registerEvents();
     
-
-    setInterval(this.CountdownTimer, 1000);
-    
   }
 
   reset() {
     this.setNewWord();
+    this.CountdownTimer();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
   }
 
   CountdownTimer() {
     
-    //let duration = document.querySelectorAll('.symbol');    
-       
-  
-    console.log(this.sec);
-    document.getElementById('status-clock').innerHTML = 'До завершения ввода слова осталось: ' + this.sec;
-
-    sec--;    
-  
-    if (sec === 0) { 
-      clearInterval(timer);
-      this.reset();
-      return
-    }     
+    let sec = Array.from(document.querySelectorAll('.symbol')).length;    
+    let timerId = setInterval(() => {
+      if (sec >= 0) {
+        document.getElementById('status-clock').innerHTML = 'До завершения ввода слова осталось: ' + sec;
+        sec--;        
+        }        
+      else { 
+        clearInterval(timerId);
+        return this.reset();        
+      }
+    }, 1000);
+    
   }
 
 
@@ -120,8 +115,7 @@ class Game {
           `<span class="symbol ${i === 0 ? 'symbol_current': ''}">${s}</span>`
       )
       .join('');
-    this.wordElement.innerHTML = html;    
-
+    this.wordElement.innerHTML = html;   
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
   }
 
