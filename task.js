@@ -14,7 +14,7 @@ class Game {
 
   reset() {
     this.setNewWord();
-    this.сountdownTimer();
+    this.сountdownTimer(); // запуск таймера
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
   }
