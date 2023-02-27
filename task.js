@@ -14,12 +14,12 @@ class Game {
 
   reset() {
     this.setNewWord();
-    this.CountdownTimer();
+    this.сountdownTimer();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
   }
 
-  CountdownTimer() {
+  сountdownTimer() {
     
     let sec = Array.from(document.querySelectorAll('.symbol')).length;    
     let timerId = setInterval(() => {
