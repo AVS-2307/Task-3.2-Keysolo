@@ -136,10 +136,10 @@ class Game {
   }
 
   startTimer() {
-    this.timerId = setInterval(this.timer.bind(this), 1000);
+    this.timerId = setInterval(this.countdownTimer.bind(this), 1000);
   };
 
-  timer() {
+  countdownTimer() {
     --this.timerElement.textContent;
     if (this.timerElement.textContent == 0) {
       this.stopTimer();
