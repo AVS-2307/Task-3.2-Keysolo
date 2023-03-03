@@ -71,6 +71,7 @@ class Game {
     if (++this.winsElement.textContent === 10) {
       alert('Победа!');
       this.reset();
+      
     }
     this.setNewWord();
   }
@@ -78,15 +79,16 @@ class Game {
   fail() {
     if (++this.lossElement.textContent === 5) {
       alert('Вы проиграли!');
-      this.reset();
+      this.reset();      
     }
     this.setNewWord();
+    
   }
 
   setNewWord() {
     const word = this.getWord();
-
     this.renderWord(word);
+    this.сountdownTimer();
   }
 
   getWord() {
@@ -117,6 +119,7 @@ class Game {
       .join('');
     this.wordElement.innerHTML = html;   
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
+    //console.log(word.length);
   }
 
 }
