@@ -4,6 +4,8 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timerElement = container.querySelector('.status__clock');
+    this.timerID = null;
 
 
     this.reset();
@@ -13,27 +15,32 @@ class Game {
   }
 
   reset() {
-    this.setNewWord();
-    this.сountdownTimer(); // запуск таймера
+    this.setNewWord();   
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
   }
 
-  сountdownTimer() {
+/*   wordLength() {
+    let wordLength = Array.from(document.querySelectorAll('.symbol')).length; 
+    console.log(wordLength);     
+    return wordLength;
     
-    let sec = Array.from(document.querySelectorAll('.symbol')).length;    
+  } */
+
+/*   сountdownTimer() {    
+    let sec = this.wordLength();    
     let timerId = setInterval(() => {
       if (sec >= 0) {
         document.getElementById('status-clock').innerHTML = 'До завершения ввода слова осталось: ' + sec;
         sec--;        
         }        
-      else { 
+      if (sec == -1) { 
         clearInterval(timerId);
-        return this.reset();        
+        this.setNewWord();                
       }
     }, 1000);
     
-  }
+  } */
 
 
   registerEvents() {
@@ -88,7 +95,7 @@ class Game {
   setNewWord() {
     const word = this.getWord();
     this.renderWord(word);
-    this.сountdownTimer();
+    this.renderTimer(word);
   }
 
   getWord() {
@@ -121,6 +128,28 @@ class Game {
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
     //console.log(word.length);
   }
+
+  renderTimer(word) {
+    this.timerElement.textContent = word.length;
+    this.stopTimer();
+    this.startTimer();
+  }
+
+  startTimer() {
+    this.timerId = setInterval(this.timer.bind(this), 1000);
+  };
+
+  timer() {
+    --this.timerElement.textContent;
+    if (this.timerElement.textContent == 0) {
+      this.stopTimer();
+      this.fail();
+    }
+  };
+
+  stopTimer() {
+    clearInterval(this.timerId);
+  };
 
 }
 
