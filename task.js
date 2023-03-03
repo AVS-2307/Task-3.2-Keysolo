@@ -20,29 +20,6 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
-/*   wordLength() {
-    let wordLength = Array.from(document.querySelectorAll('.symbol')).length; 
-    console.log(wordLength);     
-    return wordLength;
-    
-  } */
-
-/*   сountdownTimer() {    
-    let sec = this.wordLength();    
-    let timerId = setInterval(() => {
-      if (sec >= 0) {
-        document.getElementById('status-clock').innerHTML = 'До завершения ввода слова осталось: ' + sec;
-        sec--;        
-        }        
-      if (sec == -1) { 
-        clearInterval(timerId);
-        this.setNewWord();                
-      }
-    }, 1000);
-    
-  } */
-
-
   registerEvents() {
     /*
       TODO:
@@ -126,7 +103,7 @@ class Game {
       .join('');
     this.wordElement.innerHTML = html;   
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
-    //console.log(word.length);
+    
   }
 
   renderTimer(word) {
